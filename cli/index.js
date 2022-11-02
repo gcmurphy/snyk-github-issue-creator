@@ -63,7 +63,7 @@ let octokit;
 
 async function createIssues() {
     // Display confirmation when creating issues in public GitHub repo
-    let spinner = ora('Loading GitHub repositories').start();
+    let spinner = ora('Loading GitHub repositories: ${conf.ghOwner}/${conf.ghRepo}').start();
     const repo = await octokit.rest.repos.get({
         owner: conf.ghOwner,
         repo: conf.ghRepo,

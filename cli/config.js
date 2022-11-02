@@ -99,8 +99,8 @@ exports.init = async (args) => {
             process.exit(1);
         }
     } else {
-        snykOrg = getConfig('snykOrg');
-        snykProjects = getConfig('snykProjects') || [];
+        snykOrg = getConfig('snykOrg', { env: 'SNYK_ORG' });
+        snykProjects = getConfig('snykProjects', { env: 'SNYK_PROJECTS' }) || [];
     }
 
     Object.assign(
@@ -185,7 +185,7 @@ exports.init = async (args) => {
                 name: 'ghOwner',
                 message: 'GitHub Owner',
                 skip: 'ghOwner' in args,
-                initial: getConfig('ghOwner'),
+                initial: getConfig('ghOwner', { env: 'GH_OWNER' }),
                 validate: required,
             },
             {
@@ -193,7 +193,7 @@ exports.init = async (args) => {
                 name: 'ghRepo',
                 message: 'GitHub Repo',
                 skip: 'ghRepo' in args,
-                initial: getConfig('ghRepo'),
+                initial: getConfig('ghRepo', { env: 'GH_REPO' }),
                 validate: required,
             },
             {
@@ -201,42 +201,42 @@ exports.init = async (args) => {
                 name: 'projectName',
                 message: 'Project name',
                 skip: 'projectName' in args,
-                initial: getConfig('projectName'),
+                initial: getConfig('projectName', { env: 'PROJECT_NAME' }),
             },
             {
                 type: 'list',
                 name: 'ghLabels',
                 message: 'GitHub Labels',
                 skip: 'ghLabels' in args,
-                initial: getConfig('ghLabels'),
+                initial: getConfig('ghLabels', { env: 'GH_LABELS' }),
             },
             {
                 type: 'confirm',
                 name: 'severityLabel',
                 message: 'Add severity labels to issues',
                 skip: 'severityLabel' in args,
-                initial: getConfig('severityLabel'),
+                initial: true,
             },
             {
                 type: 'confirm',
                 name: 'parseManifestName',
                 message: 'Parse manifest name',
                 skip: 'parseManifestName' in args,
-                initial: getConfig('parseManifestName'),
+                initial: false,
             },
             {
                 type: 'confirm',
                 name: 'batch',
                 message: 'Batch',
                 skip: 'batch' in args,
-                initial: getConfig('batch'),
+                initial: false,
             },
             {
                 type: 'select',
                 name: 'minimumSeverity',
                 message: 'Minimum severity',
                 skip: 'minimumSeverity' in args,
-                initial: getConfig('minimumSeverity'),
+                initial: 'low',,
                 choices: SEVERITY_LEVELS,
             },
             {
@@ -244,14 +244,14 @@ exports.init = async (args) => {
                 name: 'autoGenerate',
                 message: 'Auto generate',
                 skip: 'autoGenerate' in args,
-                initial: getConfig('autoGenerate'),
+                initial: true,
             },
             {
                 type: 'confirm',
                 name: 'save',
                 message: 'Save settings',
                 skip: 'save' in args,
-                initial: getConfig('save'),
+                initial: false,
             },
         ])
     );
