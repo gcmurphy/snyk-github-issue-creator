@@ -236,7 +236,7 @@ exports.init = async (args) => {
                 name: 'minimumSeverity',
                 message: 'Minimum severity',
                 skip: 'minimumSeverity' in args,
-                initial: 'low',,
+                initial: 'low',
                 choices: SEVERITY_LEVELS,
             },
             {
